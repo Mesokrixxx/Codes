@@ -1,1 +1,1 @@
-This is all the code i made for omly a fun purpose
+This is all the code i made for a fun purpose only
