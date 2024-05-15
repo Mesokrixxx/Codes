@@ -1,0 +1,1 @@
+This is all the code i made for omly a fun purpose
