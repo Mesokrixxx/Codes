@@ -35,6 +35,24 @@ class Entity():
         self.target = None
     
     def update(self):
+        #Collision
+        if entity != []:
+            for other_entity in entity:
+                if other_entity != self and other_entity.health > 0:
+                    dx, dy = other_entity.x - self.x, other_entity.y - self.y
+                    distance = math.sqrt(dx ** 2 + dy ** 2)
+                    if distance <= (self.size + other_entity.size) / 1.8:
+                        dx = dx / distance
+                        dy = dy / distance
+                        self.x -= dx * self.speed
+                        self.y -= dy * self.speed
+                        #Atack
+                        if self.timer >= self.damageCooldown and self.target is not None and self.target.health > 0:
+                            self.target.health -= self.damage
+                            self.timer = 0
+                        else:
+                            self.timer += 1 / 30 
+        # Target part
         if self.target is None:
             closest_distance = float('inf')
             for other_entity in entity:
@@ -49,17 +67,11 @@ class Entity():
             else:
                 dx, dy = self.target.x - self.x, self.target.y - self.y
                 distance = math.sqrt(dx ** 2 + dy ** 2)
-                if distance > (self.target.size):
+                if distance > (self.target.size / 1.5):
                     dx = dx / distance
                     dy = dy / distance
                     self.x += dx * self.speed
                     self.y += dy * self.speed
-                else: 
-                    if self.timer >= self.damageCooldown:
-                        self.target.health -= self.damage
-                        self.timer = 0
-                    else:
-                        self.timer += 1 / 30 
         
     def draw(self):
         pygame.draw.rect(window, self.color, pygame.Rect(self.x, self.y, self.size, self.size))
