@@ -82,7 +82,8 @@ class Entity():
                     self.timer += 1 / 60   
             
     def draw(self):
-        pygame.draw.rect(window, self.color, pygame.Rect(self.x, self.y, self.size, self.size))
+        pygame.draw.rect(window, (0, 0, 0), (self.x - 2, self.y - 2, self.size + 4, self.size + 4))
+        pygame.draw.rect(window, self.color, (self.x, self.y, self.size, self.size))
 
 
 #Main loop
@@ -108,7 +109,7 @@ while running:
             chosenFaction = random.randint(0,2)
             spawnX = random.randint(0, WindowPARAM["width"] - entitySize)
             spawnY = random.randint(0, WindowPARAM["height"] - entitySize)
-            for i in range(random.randint(0,5)):
+            for i in range(random.randint(1,10)):
                 entity.append(Entity(spawnX, spawnY, entityColor[str(chosenFaction)], entitySize, entitySpeed, entityFaction[chosenFaction], entityHealth, entityDamage, entityDamageCooldown, entitySize * 1.2))
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             if paused: paused = False
