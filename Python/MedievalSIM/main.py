@@ -6,7 +6,7 @@ import random
 WindowPARAM = {"width": 800, "height": 800}
 #Entities
 entity = []
-entitySize = 16
+entitySize = 10
 entityColor = {"0": (0, 0, 255), "1": (0, 255, 0), "2": (255, 0, 0)}
 entityFaction = ["blue", "green", "red"]
 entitySpeed = 2
@@ -16,7 +16,7 @@ entityHealth = 4
 entityRange = entitySize * 1.2
 #Projectiles
 projectile = []
-projectileSize = 8
+projectileSize = entitySize / 2
 projectileColor = (165, 42, 42)
 projectileSpeed = 3
 
@@ -178,4 +178,3 @@ while running:
     fps.tick(60)
 
 pygame.quit()
-
