@@ -1,5 +1,7 @@
 import pygame
+
 import player
+import weapon
 
 ### Pygame Init
 WindowPARAM = {"width": 800, "height": 800}
@@ -7,12 +9,13 @@ pygame.init()
 window = pygame.display.set_mode((WindowPARAM["width"], WindowPARAM["height"]))
 fps = pygame.time.Clock()
 
-### Constants
-newPlayer = player.Player((WindowPARAM["width"] / 2), (WindowPARAM["height"] / 2), 4, 10, None, (0, 0, 255), 20, window)
+### Variables
+glock = weapon.Weapon(0, 0, 0, 0, 0, 5, 12)
+newPlayer = player.Player((WindowPARAM["width"] / 2), (WindowPARAM["height"] / 2), 4, 10, glock, (0, 0, 255), 20, window)
 
 ### Functions
-def worldUpdate(keys):
-    newPlayer.update(keys)
+def worldUpdate(keys, mousePos):
+    newPlayer.update(keys, mousePos)
 
 def worldRender():
     window.fill((128, 128, 128))
@@ -31,9 +34,10 @@ while running:
                 else: paused = True
                 
     keys = pygame.key.get_pressed()
+    mousePos = pygame.mouse.get_pos()
     
     if not paused:
-        worldUpdate(keys)
+        worldUpdate(keys, mousePos)
     worldRender()
     
     pygame.display.flip()
